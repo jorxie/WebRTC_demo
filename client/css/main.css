@@ -1,0 +1,21 @@
+body {
+    font-family: sans-serif;
+}
+
+video {
+  max-width: 100%;
+  width: 320px;
+}
+#videos span{
+  display: inline-block;
+  width: 320px;
+  color: brown;
+  text-align: center;
+}
+#buttons {
+    margin-bottom: 20px;
+}
+.line-holder{
+  margin: 20px 0;
+  color: red;
+}

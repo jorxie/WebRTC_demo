@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>WebRTC Demo</title>
+
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/socket.js"></script>
+</head>
+
+<body>
+
+    <h1>WebRTC Demo</h1>
+    <h4>client</h4>
+    <div id="buttons">
+        <button id="startCall" type="button">Start Call</button>
+        <button id="endCall" type="button">End Call</button>
+    </div>
+
+    <div id="videos">
+        <video id="localVideo" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div>
+          <span>(from camera)</span>
+          <span><span>(from webRTC)</span></span>
+        </div> 
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
+    <script src="https://cdn.temasys.io/adapterjs/0.15.x/adapter.min.js"></script>
+    <script src="js/client.js"></script>
+    <!-- <script src="js/clientB.js"></script> -->
+
+</body>
+
+</html>
