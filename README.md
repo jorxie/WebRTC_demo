@@ -1,10 +1,10 @@
 # WebRTC_demo
-##Introduction:
+## Introduction:
 A web application consists on a one-to-one video call using WebRTC.
 It's a simple demo for webrtc beginners with a node signal server and a web client. 
 node server is with koa2.
 
-##Usage:
+## Usage:
 1. cd server/
 2. npm install
 3. npm run dev
@@ -13,5 +13,5 @@ node server is with koa2.
 6. Click "Start Call" button to begin video call and "End Call" to stop
 
  
-##Contact: 
+## Contact: 
 Email: xiehuaq@gmail.com

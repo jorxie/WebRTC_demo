@@ -45,11 +45,11 @@ socket.on('user-left', function(userId) {
 });
 
 socket.on('broadcast', function(msg) {
-    console.log('clientA:Broadcast Received: ', msg); 
+    console.log('Broadcast Received: ', msg); 
     if (localUserId == msg.userId) {
         return;
     }
-    console.log('clientA:Broadcast Received: ', msg.userId); 
+    console.log('Broadcast Received: ', msg.userId); 
     switch (msg.msgType) {
         case MESSAGE_TYPE_OFFER:
             handleRemoteOffer(msg);
@@ -69,7 +69,7 @@ socket.on('broadcast', function(msg) {
 });
 
 function handleRemoteOffer(msg) {
-    console.log('clientA:Remote offer received: ', msg.sdp);
+    console.log('Remote offer received: ', msg.sdp);
     if (pc == null) {
         createPeerConnection()
     }
@@ -82,7 +82,7 @@ function handleRemoteOffer(msg) {
 }
 
 function handleRemoteAnswer(msg) {
-    console.log('clientA:Remote answer received: ', msg.sdp);
+    console.log('Remote answer received: ', msg.sdp);
     var sdp = new RTCSessionDescription({
         'type': 'answer',
         'sdp': msg.sdp
@@ -91,7 +91,7 @@ function handleRemoteAnswer(msg) {
 }
 
 function handleRemoteCandidate(msg) {
-    console.log('clientA:Remote candidate received: ', msg.candidate);
+    console.log('Remote candidate received: ', msg.candidate);
     var candidate = new RTCIceCandidate({
         sdpMLineIndex: msg.label,
         candidate: msg.candidate
@@ -110,8 +110,8 @@ var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
 navigator.mediaDevices.getUserMedia({
-    audio: true,
-    video: false
+    audio: false,
+    video: true
 })
 .then(openLocalStream)
 .catch(function(e) {
@@ -142,7 +142,7 @@ function createPeerConnection() {
 /////////////////////////////////////////////////////////
 
 function doCall() {
-    console.log('clientA:Starting call: Sending offer to remote peer');
+    console.log('Starting call: Sending offer to remote peer');
     if (pc == null) {
         createPeerConnection()
     }
@@ -150,7 +150,7 @@ function doCall() {
 }
 
 function doAnswer() {
-    console.log('clientA:Answer call: Sending answer to remote peer');
+    console.log('Answer call: Sending answer to remote peer');
     if (pc == null) {
         createPeerConnection()
     }
@@ -158,7 +158,7 @@ function doAnswer() {
 }
 
 function createOfferAndSendMessage(sessionDescription) {
-    console.log('clientA:CreateOfferAndSendMessage sending message', sessionDescription);
+    console.log('CreateOfferAndSendMessage sending message', sessionDescription);
     pc.setLocalDescription(sessionDescription);
     var message = {
         'userId': localUserId,
@@ -170,7 +170,7 @@ function createOfferAndSendMessage(sessionDescription) {
 }
 
 function createAnswerAndSendMessage(sessionDescription) {
-    console.log('clientA:CreateAnswerAndSendMessage sending message', sessionDescription);
+    console.log('CreateAnswerAndSendMessage sending message', sessionDescription);
     pc.setLocalDescription(sessionDescription);
     var message = {
         'userId': localUserId,
@@ -190,7 +190,7 @@ function handleCreateAnswerError(error) {
 }
 
 function handleIceCandidate(event) {
-    console.log('CLientA:Handle ICE candidate event: ', event);
+    console.log('Handle ICE candidate event: ', event);
     if (event.candidate) {
         var message = {
             'userId': localUserId,
@@ -200,24 +200,24 @@ function handleIceCandidate(event) {
             'candidate': event.candidate.candidate
         };
         socket.emit('broadcast', message);
-        console.log('clientA:Broadcast Candidate:', message);
+        console.log('Broadcast Candidate:', message);
     } else {
-        console.log('clientA:End of candidates.');
+        console.log('End of candidates.');
     }
 }
 
 function handleRemoteStreamAdded(event) {
-    console.log('clientA:Handle remote stream added.',event);
+    console.log('Handle remote stream added.',event);
     remoteVideo.srcObject = event.stream;
 }
 
 function handleRemoteStreamRemoved(event) {
-    console.log('clientA:Handle remote stream removed. Event: ', event);
+    console.log('Handle remote stream removed. Event: ', event);
     remoteVideo.srcObject = null;
 }
 
 function hangup() {
-    console.log('clientA:Hanging up !');
+    console.log('Hanging up !');
     remoteVideo.srcObject = null;
     if (pc != null) {
         pc.close();
