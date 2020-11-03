@@ -12,11 +12,16 @@ var pc = null; // webrtc RTCPeerConnection
 /////////////////////////////////////////////
 
 var room = prompt('Enter room name:');
-const socket = io('http://localhost:3000',{
-  transports: ['websocket'],
-  path:'/signal'
+//local server
+// const socket = io('http://localhost:3000',{
+//   transports: ['websocket'],
+//   path:'/signal'
+// }); 
+//remote server
+const socket = io('http://47.107.59.240:3000',{
+    transports: ['websocket'],
+    path:'/signal'
 }); 
-
 if (room !== '') {
     console.log('Attempted to join room:', localUserId, room);
     var args = {
