@@ -2,7 +2,7 @@
 ## Introduction:
 A web application consists on a one-to-one video call using WebRTC.
 It's a simple demo for webrtc beginners with a node signal server and a web client. 
-node server is with koa2.
+node server is based on koa2.
 
 ## Usage:
 1. cd server/
